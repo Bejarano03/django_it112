@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Chatroom</title>
+</head>
+<body>
+    <nav class="main__navbar">
+        <a href="/"><img src="{% static 'assets/logo.png' %}" alt="OpenAi logo"></a>
+        
+        <div class="main__navbar__list">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Sign In</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main__content">
+        <div>
+            <h2>Hello, welcome to my Chatroom app!</h2>
+            <a href="/members"><button>Get started</button></a>
+        </div>
+    </div>
+</body>
+</html>
