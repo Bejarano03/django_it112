@@ -9,9 +9,41 @@
     <title>Chatroom</title>
 </head>
 <body>
-    <h1>Hello there!</h1>
-    <p>testing this out</p>
+    <h1>Chat Room</h1>
+    <div id="chat">
+        <!-- Chat messages will be displayed here -->
+    </div>
+    <form id="message-form">
+        {% csrf_token %} 
+        <input type="text" id="message-input" autofocus>
+        <button type="submit">Send</button>
+    </form>
 
-    <p>Go back to <a href="/">Home</a></p>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var chatDiv = $('#chat');
+            var messageForm = $('#message-form');
+            var messageInput = $('#message-input');
+
+            messageForm.on('submit', function(event) {
+                event.preventDefault();
+                var message = messageInput.val().trim();
+                messageInput.val('');
+
+                if (message) {
+                    // Display user message in the chat
+                    chatDiv.append('<p><strong>You:</strong> ' + message + '</p>');
+
+                    // Send user message to the server
+                    $.post('/chat/', { message: message }, function(data) {
+                        // Display ChatGPT response in the chat
+                        chatDiv.append('<p><strong>ChatGPT:</strong> ' + data.response + '</p>');
+                        chatDiv.scrollTop(chatDiv[0].scrollHeight);
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
